@@ -1,0 +1,74 @@
+body {
+  background-color: rgba(0, 0, 0, 0.678);
+  overflow: hidden;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#main_card {
+  max-width: 400px;
+  flex-grow: 1;
+  background-color: white;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 4px;
+  margin-right: 4px;
+  border-radius: 20px;
+  padding: 32px;
+  z-index: 2;
+}
+
+#avatar {
+  margin: auto;
+}
+
+#avatar img {
+  opacity: 0.9;
+  width: 150px;
+  border-radius: 100%;
+}
+
+#name {
+  margin: auto;
+  justify-content: center;
+}
+#name h1 {
+  margin-bottom: 16px;
+  text-align: center;
+  font-family: Bradley Hand;
+}
+
+#intro {
+  justify-content: center;
+  margin-bottom: 32px;
+}
+#intro p {
+  margin: 0;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+#social-links {
+  justify-content: space-around;
+}
+#social-links a:hover {
+  cursor: pointer;
+}
+a:hover {
+  cursor: pointer;
+}
+
+.icon img {
+  width: 32px;
+}
