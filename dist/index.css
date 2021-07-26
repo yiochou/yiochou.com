@@ -1,8 +1,3 @@
-html {
-  background-color: #ffcfdf;
-  background-image: linear-gradient(315deg, #ffcfdf 0%, #b0f3f1 74%);
-}
-
 body {
   overflow: hidden;
   display: flex;
@@ -11,6 +6,11 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   margin: 0;
+}
+
+html {
+  background-color: #ffcfdf;
+  background-image: linear-gradient(315deg, #ffcfdf 0%, #b0f3f1 74%);
 }
 
 #main_card {
