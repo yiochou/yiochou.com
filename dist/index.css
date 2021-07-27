@@ -44,11 +44,12 @@ html {
   margin-bottom: 16px;
   text-align: center;
   font-family: Bradley Hand;
+  font-weight: 350;
 }
 
 #intro {
   justify-content: center;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 }
 #intro p {
   margin: 0;
