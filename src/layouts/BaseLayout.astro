@@ -14,17 +14,21 @@ interface Props {
   lang?: string;
   type?: 'website' | 'article';
   ogImage?: string;
+  showHeader?: boolean;
+  showFooter?: boolean;
 }
 
-const { title, description, lang = 'zh-tw', type = 'website', ogImage } = Astro.props;
+const {
+  title,
+  description,
+  lang = 'zh-tw',
+  type = 'website',
+  ogImage,
+  showHeader = true,
+  showFooter = true,
+} = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
-const nav = [
-  { href: '/blog', label: 'Blog' },
-  { href: '/now', label: 'Now' },
-  { href: '/about', label: 'About' },
-];
-const current = Astro.url.pathname;
 ---
 <html lang={lang}>
   <head>
@@ -54,24 +58,23 @@ const current = Astro.url.pathname;
     )}
   </head>
   <body>
-    <header>
-      <a class="site-name" href="/">Yio Chou<span class="dot">.</span></a>
-      <nav>
-        {nav.map((item) => (
-          <a href={item.href} class:list={{ active: current.startsWith(item.href) }}>{item.label}</a>
-        ))}
-      </nav>
-    </header>
+    {showHeader && (
+      <header>
+        <a class="site-name" href="/">Yio Chou<span class="dot">.</span></a>
+      </header>
+    )}
     <main>
       <slot />
     </main>
-    <footer>
-      <a href="https://github.com/yiochou">GitHub</a>
-      <a href="https://www.linkedin.com/in/yio-c-8956111a3/">LinkedIn</a>
-      <a href="https://www.instagram.com/yio.chou/">Instagram</a>
-      <a href="https://resume.yiochou.com/index.pdf">CV</a>
-      <a href="mailto:hi@yiochou.com">hi@yiochou.com</a>
-    </footer>
+    {showFooter && (
+      <footer>
+        <a href="https://github.com/yiochou">GitHub</a>
+        <a href="https://www.linkedin.com/in/yio-c-8956111a3/">LinkedIn</a>
+        <a href="https://www.instagram.com/yio.chou/">Instagram</a>
+        <a href="https://resume.yiochou.com/index.pdf">CV</a>
+        <a href="mailto:hi@yiochou.com">hi@yiochou.com</a>
+      </footer>
+    )}
   </body>
 </html>
 
@@ -89,17 +92,6 @@ const current = Astro.url.pathname;
     text-decoration: none;
   }
   .site-name .dot { color: var(--pink-deep); }
-  nav { display: flex; gap: 1.5rem; }
-  nav a {
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    color: var(--ink-3);
-    text-decoration: none;
-  }
-  nav a.active {
-    color: var(--ink);
-    border-bottom: 2px solid var(--pink);
-  }
   main { min-height: 55vh; }
   footer {
     margin-top: 5rem;

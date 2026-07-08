@@ -1,35 +1,108 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const now = await getEntry('pages', 'now');
+if (!now) throw new Error('missing src/content/pages/now.md');
+const { Content: NowContent } = await render(now);
 
 const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
 const isNew = (d: Date) => Date.now() - d.valueOf() < THIRTY_DAYS;
 const fmt = (d: Date) =>
   d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 ---
-<BaseLayout title="Yio Chou" description="Tech by day, inner seeker by soul. Yio Chou's personal site and blog.">
-  <h1 class="intro-title">Hi, I'm <span class="hl-name">Yio</span>.</h1>
-  <p class="intro">Tech by day, inner seeker by soul.</p>
+<BaseLayout
+  title="Yio Chou"
+  description="Tech by day, inner seeker by soul. Yio Chou's personal site and blog."
+  showHeader={false}
+  showFooter={false}
+>
+  <h1 class="site-title">Yio Chou<span class="cursor" aria-hidden="true"></span></h1>
+  <p class="tagline">Tech by day, inner seeker by soul.</p>
 
-  <p class="section-label"><span class="pill pill-teal">WRITING</span></p>
-  <ul class="post-list">
-    {posts.map((post) => (
-      <li>
-        <a href={`/blog/${post.id}`}>{post.data.title}</a>
-        {isNew(post.data.pubDate) && <span class="pill pill-pink">new</span>}
-        <span class="date">{fmt(post.data.pubDate)}</span>
-      </li>
-    ))}
-  </ul>
+  <section id="words">
+    <h2 class="sec">Words</h2>
+    <ul class="post-list">
+      {posts.map((post) => (
+        <li>
+          <a href={`/blog/${post.id}`}>{post.data.title}</a>
+          {isNew(post.data.pubDate) && <span class="pill pill-pink">new</span>}
+          <span class="date">{fmt(post.data.pubDate)}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section id="now">
+    <h2 class="sec">Now</h2>
+    <div class="now-content">
+      <NowContent />
+    </div>
+  </section>
+
+  <section id="elsewhere">
+    <h2 class="sec">Elsewhere</h2>
+    <p class="links">
+      <a href="https://github.com/yiochou">GitHub</a>
+      <span class="sep">·</span>
+      <a href="https://www.linkedin.com/in/yio-c-8956111a3/">LinkedIn</a>
+      <span class="sep">·</span>
+      <a href="https://www.instagram.com/yio.chou/">Instagram</a>
+      <span class="sep">·</span>
+      <a href="https://resume.yiochou.com/index.pdf">CV</a>
+      <span class="sep">·</span>
+      <a href="mailto:hi@yiochou.com">hi@yiochou.com</a>
+    </p>
+  </section>
 </BaseLayout>
 
 <style>
-  .intro-title { font-size: 1.6rem; margin: 0 0 0.25rem; }
-  .intro { color: var(--ink-2); margin: 0 0 3rem; }
-  .section-label { margin: 0 0 0.75rem; }
+  .site-title {
+    font-size: 2.1rem;
+    font-style: italic;
+    font-weight: 600;
+    margin: 1.5rem 0 0.25rem;
+  }
+  .cursor {
+    display: inline-block;
+    width: 0.42em;
+    height: 0.72em;
+    margin-left: 0.32em;
+    border-radius: 3px;
+    background: linear-gradient(160deg, var(--pink) 0%, var(--teal) 100%);
+    animation: breathe 3.4s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.12; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cursor { animation: none; }
+  }
+  .tagline { color: var(--ink-2); margin: 0 0 4rem; }
+
+  section { margin-bottom: 3.5rem; }
+  .sec {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: var(--ink-2);
+    margin: 0 0 0.75rem;
+  }
+  .sec::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink) 0%, var(--teal) 100%);
+  }
+
   .post-list { list-style: none; margin: 0; padding: 0; }
   .post-list li {
     display: flex;
@@ -40,4 +113,16 @@ const fmt = (d: Date) =>
   .post-list a { text-decoration: none; }
   .post-list a:hover { text-decoration: underline; text-decoration-color: var(--pink-deep); }
   .date { margin-left: auto; color: var(--ink-3); font-family: var(--font-sans); font-size: 0.8rem; }
+
+  .now-content :global(p) { margin: 0 0 0.75rem; }
+  .now-content :global(ul) { margin: 0 0 0.75rem; padding-left: 1.25rem; }
+
+  .links {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+  }
+  .links a { color: var(--ink-2); text-decoration: none; }
+  .links a:hover { color: var(--ink); text-decoration: underline; text-decoration-color: var(--teal-text); }
+  .sep { color: var(--ink-3); margin: 0 0.35rem; }
 </style>
