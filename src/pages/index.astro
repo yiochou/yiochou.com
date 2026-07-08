@@ -9,8 +9,6 @@ const now = await getEntry('pages', 'now');
 if (!now) throw new Error('missing src/content/pages/now.md');
 const { Content: NowContent } = await render(now);
 
-const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
-const isNew = (d: Date) => Date.now() - d.valueOf() < THIRTY_DAYS;
 const fmt = (d: Date) =>
   d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 ---
@@ -29,7 +27,6 @@ const fmt = (d: Date) =>
       {posts.map((post) => (
         <li>
           <a href={`/blog/${post.id}`}>{post.data.title}</a>
-          {isNew(post.data.pubDate) && <span class="pill pill-pink">new</span>}
           <span class="date">{fmt(post.data.pubDate)}</span>
         </li>
       ))}
