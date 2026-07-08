@@ -32,6 +32,7 @@ const jsonLd = {
   description={post.data.description}
   lang={post.data.lang}
   type="article"
+  ogImage={`/blog/${post.id}/og.png`}
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
   <article>
