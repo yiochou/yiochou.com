@@ -23,14 +23,18 @@ const fmt = (d: Date) =>
 
   <section id="words">
     <h2 class="sec">Words</h2>
-    <ul class="post-list">
-      {posts.map((post) => (
-        <li>
-          <a href={`/blog/${post.id}`}>{post.data.title}</a>
-          <span class="date">{fmt(post.data.pubDate)}</span>
-        </li>
-      ))}
-    </ul>
+    {posts.length > 0 ? (
+      <ul class="post-list">
+        {posts.map((post) => (
+          <li>
+            <a href={`/blog/${post.id}`}>{post.data.title}</a>
+            <span class="date">{fmt(post.data.pubDate)}</span>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="empty">soon.</p>
+    )}
   </section>
 
   <section id="now">
@@ -85,6 +89,7 @@ const fmt = (d: Date) =>
     background: linear-gradient(90deg, var(--pink) 0%, var(--teal) 100%) no-repeat left bottom / 100% 2.5px;
   }
 
+  .empty { margin: 0; font-style: italic; color: var(--ink-3); }
   .post-list { list-style: none; margin: 0; padding: 0; }
   .post-list li {
     display: flex;

@@ -1,11 +1,11 @@
 ---
 title: Now
-description: Yio 現在在做什麼——近況、正在學的東西。
+description: What Yio is up to lately.
 ---
 
-_最後更新:2026-07-08_
+_updated Jul 2026_
 
-- 正在用 Astro 重寫這個網站(你看到的就是成果)
-- 正在練習公開寫作,中文為主、偶爾英文
-
-想知道這是什麼頁面?見 [nownownow.com](https://nownownow.com/about)。
+- **work** — software engineer. the day job, still fun most days.
+- **learning** — robotic AI. currently at the "teaching computers to see" stage — computer vision first, robots later.
+- **training** — freestyle. goal: 1200m without stopping. reality: still negotiating with the water.
+- **rebuilding** — my sleep schedule. day 3. again.
