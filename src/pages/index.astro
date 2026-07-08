@@ -1,6 +1,43 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
+const isNew = (d: Date) => Date.now() - d.valueOf() < THIRTY_DAYS;
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 ---
 <BaseLayout title="Yio Chou" description="寫程式,也寫一些字。Yio Chou 的個人網站與部落格。">
-  <h1>嗨,我是 <span class="hl-name">Yio</span>。</h1>
+  <h1 class="intro-title">嗨,我是 <span class="hl-name">Yio</span>。</h1>
+  <p class="intro">寫程式,也寫一些字。相信慢慢寫,比較快。</p>
+
+  <p class="section-label"><span class="pill pill-teal">WRITING</span></p>
+  <ul class="post-list">
+    {posts.map((post) => (
+      <li>
+        <a href={`/blog/${post.id}`}>{post.data.title}</a>
+        {isNew(post.data.pubDate) && <span class="pill pill-pink">new</span>}
+        <span class="date">{fmt(post.data.pubDate)}</span>
+      </li>
+    ))}
+  </ul>
 </BaseLayout>
+
+<style>
+  .intro-title { font-size: 1.6rem; margin: 0 0 0.25rem; }
+  .intro { color: var(--ink-2); margin: 0 0 3rem; }
+  .section-label { margin: 0 0 0.75rem; }
+  .post-list { list-style: none; margin: 0; padding: 0; }
+  .post-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding: 0.45rem 0;
+  }
+  .post-list a { text-decoration: none; }
+  .post-list a:hover { text-decoration: underline; text-decoration-color: var(--pink-deep); }
+  .date { margin-left: auto; color: var(--ink-3); font-family: var(--font-sans); font-size: 0.8rem; }
+</style>
