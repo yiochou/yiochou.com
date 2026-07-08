@@ -90,7 +90,7 @@
 ## 9. 修訂:單頁化(2026-07-08,與 Yio 經 mockup 確認)
 
 - **資訊架構改為單頁**:`/` 一頁含三區塊 `● Words`(文章列表)/ `● Now` / `● Elsewhere`(對外連結);導覽列移除;`/blog`、`/now`、`/about` 301 轉回首頁對應錨點;文章頁 `/blog/<slug>` 保留(header 只剩站名、無導覽)
-- **首頁標題**:不用 "Hi, I'm Yio";大標 `Yio Chou` 全素,後接粉綠漸層「呼吸游標」方塊(3.4s 緩慢明滅,全站唯一動態,respects prefers-reduced-motion)——取代原「Yio 帶漸層底色」設計
-- **區塊小標**:8px 粉綠漸層圓點 + Garamond 斜體(取代湖水綠 pill)
+- **首頁標題**:不用 "Hi, I'm Yio";大標 `Yio Chou` 全素,後接粉綠漸層「游標」方塊(靜態,全站無動畫)——取代原「Yio 帶漸層底色」設計
+- **區塊小標**:8px 粉綠漸層圓點 + Garamond 斜體(取代湖水綠 pill;底線 2.5px 貼字寬)
 - **About 頁裁撤**:自介縮為 tagline 本身;`src/content/pages/about.md` 移除
 - 基調:低調、精簡、帶點酷
