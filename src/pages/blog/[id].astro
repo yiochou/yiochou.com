@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const fmt = (d: Date, lang: string) =>
+  d.toLocaleDateString(lang === 'en' ? 'en-US' : 'zh-TW', {
+    year: 'numeric', month: 'long', day: 'numeric',
+  });
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  ...(post.data.updatedDate && { dateModified: post.data.updatedDate.toISOString() }),
+  inLanguage: post.data.lang,
+  author: { '@type': 'Person', name: 'Yio Chou', url: 'https://yiochou.com' },
+  mainEntityOfPage: new URL(`/blog/${post.id}`, Astro.site).toString(),
+};
+---
+<BaseLayout
+  title={`${post.data.title} — Yio Chou`}
+  description={post.data.description}
+  lang={post.data.lang}
+  type="article"
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+  <article>
+    <p class="meta">
+      <span class="pill pill-teal">ESSAY</span>
+      <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate, post.data.lang)}</time>
+    </p>
+    <h1>{post.data.title}</h1>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0 0 1rem;
+    color: var(--ink-3);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+  }
+  h1 { font-size: 1.75rem; margin: 0 0 2rem; }
+  .prose :global(h2) { font-size: 1.25rem; margin: 2.5rem 0 0.75rem; }
+  .prose :global(p) { margin: 0 0 1.25rem; }
+  .prose :global(blockquote) {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 3px solid var(--pink);
+    color: var(--ink-2);
+  }
+  .prose :global(hr) { border: none; border-top: 1px solid var(--line); margin: 2.5rem 0; }
+</style>
