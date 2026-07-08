@@ -6,7 +6,7 @@ export async function GET(context) {
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
   return rss({
     title: 'Yio Chou',
-    description: '寫程式,也寫一些字。',
+    description: 'Tech by day, inner seeker by soul.',
     site: context.site,
     items: posts.map((post) => ({
       title: post.data.title,

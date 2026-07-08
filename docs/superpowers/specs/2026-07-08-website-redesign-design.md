@@ -21,7 +21,7 @@
 | `/404` | 自訂 404 頁 |
 
 - 對外連結(About 頁 + 全站頁尾):GitHub、LinkedIn、CV(resume.yiochou.com/index.pdf)、Email(hi@yiochou.com)
-- 不保留:Instagram 連結
+- Instagram(https://www.instagram.com/yio.chou/)——2026-07-08 追加保留
 
 ## 3. 視覺設計(已定案)
 
@@ -78,7 +78,7 @@
 
 ## 7. 明確不做(第一版)
 
-深色模式、留言系統、標籤/分類、站內搜尋、Instagram 連結、多語言介面切換。文章量少時這些都是負擔,之後有需要再加。
+深色模式、留言系統、標籤/分類、站內搜尋、多語言介面切換。文章量少時這些都是負擔,之後有需要再加。
 
 ## 8. 測試與驗收
 
