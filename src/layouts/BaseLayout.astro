@@ -1,0 +1,115 @@
+---
+import '@fontsource/eb-garamond/400.css';
+import '@fontsource/eb-garamond/400-italic.css';
+import '@fontsource/eb-garamond/600.css';
+import '@fontsource/lxgw-wenkai-tc/index.css';
+import '@fontsource-variable/inter/index.css';
+import '@fontsource-variable/noto-sans-tc/index.css';
+import '../styles/global.css';
+import ebGaramondWoff2 from '@fontsource/eb-garamond/files/eb-garamond-latin-400-normal.woff2?url';
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: string;
+  type?: 'website' | 'article';
+  ogImage?: string;
+}
+
+const { title, description, lang = 'zh-tw', type = 'website', ogImage } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
+const nav = [
+  { href: '/blog', label: 'Blog' },
+  { href: '/now', label: 'Now' },
+  { href: '/about', label: 'About' },
+];
+const current = Astro.url.pathname;
+---
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="preload" href={ebGaramondWoff2} as="font" type="font/woff2" crossorigin />
+    <link rel="alternate" type="application/rss+xml" title="Yio Chou" href={new URL('rss.xml', Astro.site)} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={new URL(ogImage, Astro.site)} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />}
+    {beaconToken && (
+      <script
+        is:inline
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={`{"token": "${beaconToken}"}`}
+      ></script>
+    )}
+  </head>
+  <body>
+    <header>
+      <a class="site-name" href="/">Yio Chou<span class="dot">.</span></a>
+      <nav>
+        {nav.map((item) => (
+          <a href={item.href} class:list={{ active: current.startsWith(item.href) }}>{item.label}</a>
+        ))}
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <a href="https://github.com/yiochou">GitHub</a>
+      <a href="https://www.linkedin.com/in/yio-c-8956111a3/">LinkedIn</a>
+      <a href="https://resume.yiochou.com/index.pdf">CV</a>
+      <a href="mailto:hi@yiochou.com">hi@yiochou.com</a>
+    </footer>
+  </body>
+</html>
+
+<style>
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4rem;
+  }
+  .site-name {
+    font-style: italic;
+    font-size: 1.15rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .site-name .dot { color: var(--pink-deep); }
+  nav { display: flex; gap: 1.5rem; }
+  nav a {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--ink-3);
+    text-decoration: none;
+  }
+  nav a.active {
+    color: var(--ink);
+    border-bottom: 2px solid var(--pink);
+  }
+  main { min-height: 55vh; }
+  footer {
+    margin-top: 5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--ink-3); text-decoration: none; }
+  footer a:hover { color: var(--ink); text-decoration: underline; text-decoration-color: var(--teal-text); }
+</style>

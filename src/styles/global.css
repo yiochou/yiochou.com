@@ -1,0 +1,55 @@
+:root {
+  --bg: #fffdf8;
+  --ink: #292524;
+  --ink-2: #78716c;
+  --ink-3: #a8a29e;
+  --line: #e7e5e4;
+  --pink: #ffcfdf;
+  --pink-deep: #e0679a;
+  --pink-text: #9d2c5a;
+  --teal: #b0f3f1;
+  --teal-text: #134e4a;
+  --font-serif: 'EB Garamond', 'LXGW WenKai TC', serif;
+  --font-sans: 'Inter Variable', 'Noto Sans TC Variable', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--bg); }
+
+body {
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+  max-width: 42rem;
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: 1.9;
+}
+
+h1, h2, h3 { line-height: 1.4; font-weight: 600; }
+
+a { color: inherit; text-decoration-color: var(--pink-deep); text-underline-offset: 4px; }
+a:hover { text-decoration-color: var(--teal-text); }
+
+code, pre { font-family: var(--font-mono); font-size: 0.85em; }
+pre { padding: 1rem 1.25rem; overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; line-height: 1.6; }
+
+img { max-width: 100%; height: auto; }
+
+.pill {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  padding: 0.15rem 0.7rem;
+  border-radius: 99px;
+}
+.pill-teal { background: var(--teal); color: var(--teal-text); }
+.pill-pink { background: var(--pink); color: var(--pink-text); }
+
+.hl-name {
+  background: linear-gradient(120deg, var(--pink) 0%, var(--teal) 100%);
+  padding: 0 0.35rem;
+  border-radius: 4px;
+}
