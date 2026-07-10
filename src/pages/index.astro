@@ -16,6 +16,9 @@ const { Content: NowContent } = await render(now);
 const fmt = (d: Date) =>
   d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 
+const ver = (d: Date) =>
+  `v${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}`;
+
 let nowUpdated = new Date();
 try {
   const iso = execSync('git log -1 --format=%cI -- src/content/pages/now.md', {
@@ -56,7 +59,7 @@ try {
     <div class="now-content">
       <NowContent />
     </div>
-    <p class="updated">updated {fmt(nowUpdated)}</p>
+    <p class="updated">{ver(nowUpdated)}</p>
   </section>
 
   {songs.length > 0 && (
