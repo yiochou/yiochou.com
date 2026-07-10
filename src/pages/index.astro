@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection, getEntry, render } from 'astro:content';
+import { execSync } from 'node:child_process';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
@@ -11,6 +12,16 @@ const { Content: NowContent } = await render(now);
 
 const fmt = (d: Date) =>
   d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+
+let nowUpdated = new Date();
+try {
+  const iso = execSync('git log -1 --format=%cI -- src/content/pages/now.md', {
+    encoding: 'utf-8',
+  }).trim();
+  if (iso) nowUpdated = new Date(iso);
+} catch {
+  // no git history available at build time; fall back to build date
+}
 ---
 <BaseLayout
   title="Yio Chou"
@@ -42,6 +53,7 @@ const fmt = (d: Date) =>
     <div class="now-content">
       <NowContent />
     </div>
+    <p class="updated">updated {fmt(nowUpdated)}</p>
   </section>
 
   <section id="elsewhere">
@@ -103,6 +115,7 @@ const fmt = (d: Date) =>
 
   .now-content :global(p) { margin: 0 0 0.75rem; }
   .now-content :global(ul) { margin: 0 0 0.75rem; padding-left: 1.25rem; }
+  .updated { margin: 0; font-style: italic; color: var(--ink-3); font-size: 0.85rem; }
 
   .links {
     margin: 0;
