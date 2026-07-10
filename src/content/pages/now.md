@@ -3,10 +3,10 @@ title: Now
 description: What Yio is up to lately.
 ---
 
-Software engineer.
+Software engineer, mostly.
 
-往 Robotic AI 探索, 買了台 ARM SO-101 玩玩, 學習新領域總是令人興奮
+Got obsessed with robotic AI. There's an ARM SO-101 on my desk now. Still figuring out which end is which.
 
-一週兩次 6 am 泡在泳池學自由式, 目標 1200m 不間斷
+6am pool, twice a week. Freestyle, badly. 1200m nonstop, eventually.
 
-Rebuild 生活節奏, 把自己多丟出去, 多輸出一些創作
+Trying to build a rhythm again. Showing up more. Making more.
