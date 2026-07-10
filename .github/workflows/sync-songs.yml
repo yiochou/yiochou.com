@@ -1,0 +1,34 @@
+name: sync songs
+
+on:
+  schedule:
+    - cron: '0 22 * * *' # 06:00 Asia/Taipei
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: sync songs from playlist
+        run: node scripts/sync-songs.mjs
+
+      - name: commit and push if changed
+        run: |
+          if git diff --quiet src/data/songs.json; then
+            echo "songs unchanged, nothing to do"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/songs.json
+          git commit -m "chore: sync on repeat songs"
+          git push
