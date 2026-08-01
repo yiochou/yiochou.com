@@ -34,7 +34,7 @@ The description is a guess drawn from the title, because a title alone rarely sa
 |---|---|
 | `slug` | ASCII, lowercase, hyphens. 2 to 4 words. Translate the meaning of a Chinese title, never transliterate. `六點的泳池` becomes `pool-at-six`, not `liu-dian-de-yong-chi`. |
 | `lang` | `en` or `zh-tw`. Infer from the language the **body** will be written in, not the title. A Chinese post can carry an English title. If the title alone does not settle it, ask in the same line. |
-| `description` | One line. Same language as the post. It reaches `<meta>`, the OG image, and the RSS feed, so it is public copy: no em dashes, short sentences, periods for pauses, understated. Say what the post argues, not which category it belongs to. |
+| `description` | One line. Same language as the post. It reaches `<meta>`, the link preview card, and the RSS feed, so it is public copy: no em dashes, short sentences, periods for pauses, understated. Say what the post argues, not which category it belongs to. |
 
 ## Step 2: Create, after he approves
 
