@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "sync-songs": "node scripts/sync-songs.mjs"
+    "sync-songs": "node scripts/sync-songs.mjs",
+    "new-post": "node scripts/new-post.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
