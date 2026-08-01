@@ -5,3 +5,8 @@ node_modules/
 dist/
 .astro/
 .claude/settings.local.json
+.zed/
+
+# Swift sources from another project, parked here by accident
+Sources/
+Tests/
