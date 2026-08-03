@@ -1,5 +1,10 @@
 [
   {
+    "title": "spiral",
+    "artist": "LONGMAN",
+    "url": "https://open.spotify.com/track/6xAIVrhyFQaHwPVWfUvWvE"
+  },
+  {
     "title": "如果每天都可以 happy happy 誰想要sad:))",
     "artist": "陳嫺靜",
     "url": "https://open.spotify.com/track/5u6xwrIwh9cPW9VXCODU7v"
@@ -18,10 +23,5 @@
     "title": "CAT'S EYE - (NEW TAKE)",
     "artist": "Anri",
     "url": "https://open.spotify.com/track/6igMq65qc3o0CUhSoHf9yD"
-  },
-  {
-    "title": "Life in Mono",
-    "artist": "Mono",
-    "url": "https://open.spotify.com/track/7qQHY37ivWoAEk6tMu2fhr"
   }
 ]
