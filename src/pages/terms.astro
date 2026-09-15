@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  lang="en"
+  title="Terms — Nora"
+  description="The terms for Nora, a personal assistant with one user."
+>
+  <h1 class="page-title">Terms</h1>
+  <p class="lede">
+    <strong>Nora</strong> is a private tool that Yio Chou built for himself.
+    It is offered to nobody else, and it has no other user.
+  </p>
+
+  <h2>No warranty</h2>
+  <p>Nora comes as it is. Yio accepts every risk of running it. A language
+  model can be wrong, thus Nora can be wrong.</p>
+
+  <h2>The end of it</h2>
+  <p>Yio can stop Nora at any time, and its access to his Google account ends
+  with it.</p>
+
+  <h2>Contact</h2>
+  <p>Write to <a href="mailto:hi@yiochou.com">hi@yiochou.com</a>.</p>
+
+  <p class="updated">Last updated 2026-09-15.</p>
+</BaseLayout>
+
+<style>
+  .page-title { font-size: 1.6rem; margin: 0 0 1rem; }
+  .lede { color: var(--ink-2); }
+  h2 { font-size: 1.05rem; margin: 2rem 0 0.5rem; }
+  .updated { color: var(--ink-3); font-size: 0.85rem; font-style: italic; margin-top: 2.5rem; }
+</style>
